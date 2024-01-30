@@ -10,11 +10,18 @@ class ListNode:
 
 
 class LinkedList:
+    """
+    Linked list implementation of the List abstract data type.
+    """
+
     def __init__(self) -> None:
         self.head = None
         self._size = 0
 
     def __str__(self) -> str:
+        """
+        Returns a string representation of this LinkedList, containing the String representation of each element.
+        """
         if not self.head:
             return "[]"
 
@@ -53,7 +60,7 @@ class LinkedList:
         Time Complexity: O(n)
         """
         if index < 0 or index >= self._size:
-            raise IndexError("List index out of range")
+            raise IndexError("List index is out of range")
 
         curr_index = 0
         curr = self.head
@@ -68,8 +75,8 @@ class LinkedList:
         Time Complexity: O(n)
         """
         if index < 0 or index > self._size:
-            raise IndexError("List index out of range")
-        
+            raise IndexError("List index is out of range")
+
         if index == 0:
             self.add_first(item)
             return
@@ -79,7 +86,7 @@ class LinkedList:
         while curr.next and position + 1 != index:
             curr = curr.next
             position += 1
-        
+
         new_node = ListNode(item)
         new_node.next = curr.next
         curr.next = new_node
@@ -118,7 +125,7 @@ class LinkedList:
         Time Complexity: O(n)
         """
         if index < 0 or index >= self._size:
-            raise IndexError("List index out of range")
+            raise IndexError("List index is out of range")
 
         if index == 0:
             return self.remove_first()
@@ -141,7 +148,7 @@ class LinkedList:
         Time Complexity: O(1)
         """
         if not self.head:
-            raise IndexError("Empty list")
+            raise IndexError("List is empty")
 
         data = self.head.data
         self.head = self.head.next
@@ -155,7 +162,7 @@ class LinkedList:
         Time Complexity: O(n)
         """
         if not self.head:
-            raise IndexError("Empty list")
+            raise IndexError("List is empty")
 
         curr = self.head
         while curr.next.next:

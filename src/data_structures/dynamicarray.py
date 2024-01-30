@@ -4,6 +4,10 @@ T = TypeVar("T")
 
 
 class DynamicArray:
+    """
+    Resizable-array implementation of the List abstract data type.
+    """
+
     def __init__(self, capacity: int = 10) -> None:
         self._capacity = capacity
         self._size = 0
@@ -16,16 +20,16 @@ class DynamicArray:
         pass
 
     def __str__(self) -> str:
+        """
+        Returns a string representation of this DynamicArray, containing the String representation of each element.
+        """
         if self._size == 0:
             return "[]"
 
         return str(self.array[: self._size])
 
     def __repr__(self) -> str:
-        if not self._sizea:
-            return "DynamicArray([])"
-
-        return "DynamicArray(" + str(self.array[: self._size]) + ")"
+        pass
 
     def __eq__(self, other: Any) -> bool:
         pass
@@ -46,13 +50,20 @@ class DynamicArray:
         """
         return self._size
 
+    def contains(self, item: T) -> bool:
+        """
+        Returns true if this list contains the specified element.
+        Time Complexity: O(n)
+        """
+        return item in self.array
+
     def get(self, index: int) -> T:
         """
         Returns the element at the specified position in this array.
         Time Complexity: O(1)
         """
         if index < 0 or index >= self._size:
-            raise IndexError("Array index out of range")
+            raise IndexError("Array index is out of range")
 
         return self.array[index]
 
@@ -62,7 +73,7 @@ class DynamicArray:
         Time Complexity: O(n)
         """
         if index < 0 or index >= self._size:
-            raise IndexError("Array index out of range")
+            raise IndexError("Array index is out of range")
 
         if self._size + 1 > self._capacity:
             self._resize()
@@ -95,7 +106,7 @@ class DynamicArray:
         Time Complexity: O(n)
         """
         if index < 0 or index >= self._size:
-            raise IndexError("Array index out of range")
+            raise IndexError("Array index is out of range")
 
         removed_elem = self.array[index]
         new_array = self.array[:index]
@@ -110,7 +121,7 @@ class DynamicArray:
         Time Complexity: O(1)
         """
         if not self._size:
-            raise IndexError("Empty array")
+            raise IndexError("Array is empty")
 
         removed_elem = self.array[self._size - 1]
         self.array[self._size - 1] = None

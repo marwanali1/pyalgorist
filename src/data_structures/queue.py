@@ -3,13 +3,13 @@ from typing import TypeVar, Generic
 T = TypeVar("T")
 
 
-class QueueNode(Generic[T]):
+class QueueNode:
     def __init__(self, data: T) -> None:
         self.data = data
         self.next = None
 
 
-class Queue(Generic[T]):
+class Queue:
     """
     The Queue class represents a first-in-first-out (FIFO) queue of objects.
     """
@@ -18,47 +18,75 @@ class Queue(Generic[T]):
         self.first = None
         self.last = None
 
+    def __str__(self) -> str:
+        """
+        Returns a string representation of this Queue, containing the String representation of each element.
+        """
+        if not self.first:
+            return "[]"
+
+        elems = []
+        curr = self.first
+        while curr:
+            elems.append(curr.data)
+            curr = curr.next
+
+        return str(elems)
+
+    def contains(self, item: T) -> bool:
+        """
+        Returns true if this queue contains the specified element.
+        Time Complexity: O(n)
+        """
+        curr = self.first
+        while curr:
+            if curr.data == item:
+                return True
+            curr = curr.next
+
+        return False
+
     def enqueue(self, item: T) -> None:
         """
-        Adds an item to the end of the queue.
+        Inserts the specified element to the end this queue.
         Time Complexity: O(1)
         """
         new_item = QueueNode(item)
-        if self.last != None:
+        if self.last:
             self.last.next = new_item
-
         self.last = new_item
-        if self.first == None:
+
+        if self.empty():
             self.first = self.last
 
     def dequeue(self) -> T:
         """
-        Removes the first item in the queue.
+        Retrieves and removes the head of this queue.
         Time Complexity: O(1)
         """
-        if self.first == None:
-            raise Exception("Empty queue")
+        if self.empty():
+            raise IndexError("Queue is empty")
 
-        data = self.first.data
+        elem = self.first.data
         self.first = self.first.next
-        if self.first == None:
+        if not self.first.next:
             self.last = None
-
-        return data
+        
+        return elem
 
     def peek(self) -> T:
         """
-        Returns the first item in the queue.
+        Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
         Time Complexity: O(1)
         """
-        if self.first == None:
-            raise Exception("Empty queue")
+        if self.empty():
+            return None
 
         return self.first.data
 
-    def isEmpty(self) -> bool:
+    def empty(self) -> bool:
         """
         Tests if this queue is empty.
         Time Complexity: O(1)
         """
-        return self.first == None
+        return not self.first

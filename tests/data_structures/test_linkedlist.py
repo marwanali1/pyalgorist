@@ -3,12 +3,7 @@ from src.data_structures.linkedlist import LinkedList
 
 
 class TestStack(unittest.TestCase):
-    def test_contains_single_element_list(self) -> None:
-        linkedlist = LinkedList()
-        linkedlist.add_last(1)
-        self.assertTrue(linkedlist.contains(1))
-
-    def test_contains_multiple_element_list(self) -> None:
+    def test_contains_true(self) -> None:
         linkedlist = LinkedList()
         linkedlist.add_last(1)
         linkedlist.add_last(2)
@@ -16,6 +11,19 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(4)
         linkedlist.add_last(5)
         self.assertTrue(linkedlist.contains(5))
+
+    def test_contains_false(self) -> None:
+        linkedlist = LinkedList()
+        linkedlist.add_last(1)
+        linkedlist.add_last(2)
+        linkedlist.add_last(3)
+        linkedlist.add_last(4)
+        linkedlist.add_last(5)
+        self.assertFalse(linkedlist.contains(7))
+    
+    def test_contains_on_empty_list(self) -> None:
+        linkedlist = LinkedList()
+        self.assertFalse(linkedlist.contains(1))
 
     def test_get(self) -> None:
         linkedlist = LinkedList()
@@ -29,13 +37,13 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(2)
         with self.assertRaises(IndexError) as err:
             linkedlist.get(-1)
-        self.assertEqual("List index out of range", str(err.exception))
+        self.assertEqual("List index is out of range", str(err.exception))
 
     def test_get_on_empty_list(self) -> None:
         linkedlist = LinkedList()
         with self.assertRaises(IndexError) as err:
             linkedlist.get(0)
-        self.assertEqual("List index out of range", str(err.exception))
+        self.assertEqual("List index is out of range", str(err.exception))
 
     def test_add_single_add(self) -> None:
         linkedlist = LinkedList()
@@ -84,7 +92,7 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(2)
         with self.assertRaises(IndexError) as err:
             linkedlist.add(-1, 3)
-        self.assertEqual("List index out of range", str(err.exception))
+        self.assertEqual("List index is out of range", str(err.exception))
 
     def test_add_first_single_add(self) -> None:
         linkedlist = LinkedList()
@@ -143,7 +151,7 @@ class TestStack(unittest.TestCase):
         removed_data = linkedlist.remove(0)
         self.assertEqual(str(linkedlist), "[2, 3]")
         self.assertEqual(removed_data, 1)
-    
+
     def test_remove_remove_at_end(self) -> None:
         linkedlist = LinkedList()
         linkedlist.add_last(1)
@@ -154,13 +162,13 @@ class TestStack(unittest.TestCase):
         removed_data = linkedlist.remove(2)
         self.assertEqual(str(linkedlist), "[1, 2]")
         self.assertEqual(removed_data, 3)
-    
+
     def test_remove_invalid_index(self) -> None:
         linkedlist = LinkedList()
         with self.assertRaises(IndexError) as error:
             linkedlist.remove(1)
-        self.assertEqual("List index out of range", str(error.exception))
-    
+        self.assertEqual("List index is out of range", str(error.exception))
+
     def test_remove_first_single_remove(self) -> None:
         linkedlist = LinkedList()
         linkedlist.add_last(1)
@@ -181,7 +189,7 @@ class TestStack(unittest.TestCase):
         linkedlist = LinkedList()
         with self.assertRaises(IndexError) as err:
             linkedlist.remove_first()
-        self.assertEqual("Empty list", str(err.exception))
+        self.assertEqual("List is empty", str(err.exception))
 
     def test_remove_last_single_remove(self) -> None:
         linkedlist = LinkedList()
@@ -203,7 +211,7 @@ class TestStack(unittest.TestCase):
         linkedlist = LinkedList()
         with self.assertRaises(IndexError) as err:
             linkedlist.remove_last()
-        self.assertEqual("Empty list", str(err.exception))
+        self.assertEqual("List is empty", str(err.exception))
 
     def test_reverse_single_node(self) -> None:
         linkedlist = LinkedList()

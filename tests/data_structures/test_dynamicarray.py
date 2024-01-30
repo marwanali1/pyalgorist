@@ -16,6 +16,28 @@ class TestDynamicArray(unittest.TestCase):
         dynamicarray._resize()
         self.assertEqual(dynamicarray.capacity, 20)
 
+    def test_contains_true(self) -> None:
+        dynamicarray = DynamicArray()
+        dynamicarray.add_last(1)
+        dynamicarray.add_last(2)
+        dynamicarray.add_last(3)
+        dynamicarray.add_last(4)
+        dynamicarray.add_last(5)
+        self.assertTrue(dynamicarray.contains(5))
+
+    def test_contains_false(self) -> None:
+        dynamicarray = DynamicArray()
+        dynamicarray.add_last(1)
+        dynamicarray.add_last(2)
+        dynamicarray.add_last(3)
+        dynamicarray.add_last(4)
+        dynamicarray.add_last(5)
+        self.assertFalse(dynamicarray.contains(7))
+
+    def test_contains_on_empty_list(self) -> None:
+        dynamicarray = DynamicArray()
+        self.assertFalse(dynamicarray.contains(1))
+
     def test_get_single_add(self) -> None:
         dynamicarray = DynamicArray()
         dynamicarray.add_last(1)
@@ -47,14 +69,14 @@ class TestDynamicArray(unittest.TestCase):
         dynamicarray = DynamicArray()
         with self.assertRaises(IndexError) as err:
             dynamicarray.get(0)
-        self.assertEqual("Array index out of range", str(err.exception))
+        self.assertEqual("Array index is out of range", str(err.exception))
 
     def test_get_empty_invalid_index(self) -> None:
         dynamicarray = DynamicArray()
         dynamicarray.add_last(1)
         with self.assertRaises(IndexError) as err:
             dynamicarray.get(1)
-        self.assertEqual("Array index out of range", str(err.exception))
+        self.assertEqual("Array index is out of range", str(err.exception))
 
     def test_add_single_add(self) -> None:
         dynamicarray = DynamicArray(3)
@@ -81,7 +103,7 @@ class TestDynamicArray(unittest.TestCase):
         dynamicarray = DynamicArray()
         with self.assertRaises(IndexError) as error:
             dynamicarray.add(11, 1)
-        self.assertEqual("Array index out of range", str(error.exception))
+        self.assertEqual("Array index is out of range", str(error.exception))
 
     def test_add_last_single_add(self) -> None:
         dynamicarray = DynamicArray()
@@ -122,7 +144,7 @@ class TestDynamicArray(unittest.TestCase):
         dynamicarray = DynamicArray()
         with self.assertRaises(IndexError) as error:
             dynamicarray.remove(1)
-        self.assertEqual("Array index out of range", str(error.exception))
+        self.assertEqual("Array index is out of range", str(error.exception))
 
     def test_remove_last_single_remove(self) -> None:
         dynamicarray = DynamicArray(3)
@@ -150,7 +172,7 @@ class TestDynamicArray(unittest.TestCase):
         dynamicarray = DynamicArray(3)
         with self.assertRaises(IndexError) as err:
             dynamicarray.remove_last()
-        self.assertEqual("Empty array", str(err.exception))
+        self.assertEqual("Array is empty", str(err.exception))
 
     def test_resize(self) -> None:
         dynamicarray = DynamicArray()
