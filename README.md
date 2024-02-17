@@ -4,10 +4,19 @@
 
 A library of commonly used data structures, algorithms, and design patterns implemented in Python.
 
-### Running Python Files:
-`python3 src/algorithms/sort/insertion_sort.py`  
-`python3 src/data_structures/stack.py`  
+## Getting Started
 
-### Running Python Tests:
-`python3 -m unittest tests/algorithms/sort/test_insertion_sort.py`  
-`python3 -m unittest tests/data_structures/test_stack.py`
+#### Run in Python REPL
+`cd pyalgorist`  
+`python3`  
+`>>> from src.data_structures.hashtable import HashTable`  
+`>>> hashtable = HashTable()`  
+`>>> hashtable.put("one", 1)`  
+`>>> print(hashtable)`  
+`{'one': 1}`
+
+#### Run Source File
+`python3 src/data_structures/hashtable.py`  
+
+#### Run Test File
+`python3 -m unittest tests/data_structures/test_hashtable.py`
