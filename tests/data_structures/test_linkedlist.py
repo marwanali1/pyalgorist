@@ -31,6 +31,15 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(2)
         self.assertEqual(linkedlist.get(0), 1)
 
+    def test_get_two(self) -> None:
+        linkedlist = LinkedList()
+        linkedlist.add_last(1)
+        linkedlist.add_last(2)
+        linkedlist.add_last(3)
+        linkedlist.add_last(4)
+        linkedlist.add_last(5)
+        self.assertEqual(linkedlist.get(2), 3)
+
     def test_get_index_out_of_range(self) -> None:
         linkedlist = LinkedList()
         linkedlist.add_last(1)

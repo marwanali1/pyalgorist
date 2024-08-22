@@ -33,28 +33,28 @@ class Queue:
 
         return str(elems)
 
-    def contains(self, item: T) -> bool:
+    def contains(self, elem: T) -> bool:
         """
         Returns true if this queue contains the specified element.
         Time Complexity: O(n)
         """
         curr = self.first
         while curr:
-            if curr.data == item:
+            if curr.data == elem:
                 return True
             curr = curr.next
 
         return False
 
-    def enqueue(self, item: T) -> None:
+    def enqueue(self, elem: T) -> None:
         """
         Inserts the specified element to the end this queue.
         Time Complexity: O(1)
         """
-        new_item = QueueNode(item)
+        new_elem = QueueNode(elem)
         if self.last:
-            self.last.next = new_item
-        self.last = new_item
+            self.last.next = new_elem
+        self.last = new_elem
 
         if self.empty():
             self.first = self.last
@@ -69,7 +69,7 @@ class Queue:
 
         elem = self.first.data
         self.first = self.first.next
-        if not self.first.next:
+        if not self.first:
             self.last = None
         
         return elem

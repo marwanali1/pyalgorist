@@ -32,14 +32,14 @@ class Stack:
 
         return str(elems)
 
-    def contains(self, item: T) -> bool:
+    def contains(self, elem: T) -> bool:
         """
         Returns true if this stack contains the specified element.
         Time Complexity: O(n)
         """
         curr = self.top
         while curr:
-            if curr.data == item:
+            if curr.data == elem:
                 return True
             curr = curr.next
         
@@ -74,11 +74,11 @@ class Stack:
         self.top = self.top.next
         return elem
 
-    def push(self, item: T) -> None:
+    def push(self, elem: T) -> None:
         """
-        Pushes an item onto the top of this stack.
+        Pushes an element onto the top of this stack.
         Time Complexity: O(1)
         """
-        new_top = StackNode(item)
+        new_top = StackNode(elem)
         new_top.next = self.top
         self.top = new_top

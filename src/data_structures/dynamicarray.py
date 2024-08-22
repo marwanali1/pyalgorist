@@ -1,4 +1,4 @@
-from typing import Any, Iterable, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
@@ -50,12 +50,12 @@ class DynamicArray:
         """
         return self._size
 
-    def contains(self, item: T) -> bool:
+    def contains(self, elem: T) -> bool:
         """
         Returns true if this list contains the specified element.
         Time Complexity: O(n)
         """
-        return item in self.array
+        return elem in self.array
 
     def get(self, index: int) -> T:
         """
@@ -67,7 +67,7 @@ class DynamicArray:
 
         return self.array[index]
 
-    def add(self, index: int, item: T) -> None:
+    def add(self, index: int, elem: T) -> None:
         """
         Inserts the specified element at the specified position in this array.
         Time Complexity: O(n)
@@ -79,17 +79,17 @@ class DynamicArray:
             self._resize()
 
         if not self.array[index]:
-            self.array[index] = item
+            self.array[index] = elem
             self._size += 1
             return
 
         new_array = self.array[:index]
-        new_array.append(item)
+        new_array.append(elem)
         new_array += self.array[index:]
         self.array = new_array
         self._size += 1
 
-    def add_last(self, item: T) -> None:
+    def add_last(self, elem: T) -> None:
         """
         Appends the specified element to the end of this array.
         Time Complexity: O(n)
@@ -97,7 +97,7 @@ class DynamicArray:
         if self._size == self._capacity:
             self._resize()
 
-        self.array[self._size] = item
+        self.array[self._size] = elem
         self._size += 1
 
     def remove(self, index: int) -> T:

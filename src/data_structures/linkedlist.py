@@ -41,14 +41,14 @@ class LinkedList:
         """
         return self._size
 
-    def contains(self, item: T) -> bool:
+    def contains(self, elem: T) -> bool:
         """
         Returns true if this list contains the specified element.
         Time Complexity: O(n)
         """
         curr = self.head
         while curr:
-            if curr.data == item:
+            if curr.data == elem:
                 return True
             curr = curr.next
 
@@ -64,12 +64,13 @@ class LinkedList:
 
         curr_index = 0
         curr = self.head
-        while curr and curr_index != index:
+        while curr and curr_index < index:
             curr = curr.next
+            curr_index += 1
 
         return curr.data
 
-    def add(self, index, item: T) -> None:
+    def add(self, index, elem: T) -> None:
         """
         Inserts the specified element at the specified position in this list.
         Time Complexity: O(n)
@@ -78,37 +79,37 @@ class LinkedList:
             raise IndexError("List index is out of range")
 
         if index == 0:
-            self.add_first(item)
+            self.add_first(elem)
             return
 
-        curr, position = ListNode(), -1
+        curr, curr_index = ListNode(), 0
         curr.next = self.head
-        while curr.next and position + 1 != index:
+        while curr.next and curr_index < index:
             curr = curr.next
-            position += 1
+            curr_index += 1
 
-        new_node = ListNode(item)
+        new_node = ListNode(elem)
         new_node.next = curr.next
         curr.next = new_node
         self._size += 1
 
-    def add_first(self, item: T) -> None:
+    def add_first(self, elem: T) -> None:
         """
         Inserts the specified element at the beginning of this list.
         Time Complexity: O(1)
         """
-        new_node = ListNode(item)
+        new_node = ListNode(elem)
         new_node.next = self.head
         self.head = new_node
         self._size += 1
 
-    def add_last(self, item: T) -> None:
+    def add_last(self, elem: T) -> None:
         """
         Appends the specified element to the end of this list.
         Time Complexity: O(n)
         """
         if not self.head:
-            self.head = ListNode(item)
+            self.head = ListNode(elem)
             self._size += 1
             return
 
@@ -116,7 +117,7 @@ class LinkedList:
         while curr.next:
             curr = curr.next
 
-        curr.next = ListNode(item)
+        curr.next = ListNode(elem)
         self._size += 1
 
     def remove(self, index: int) -> T:
@@ -130,11 +131,11 @@ class LinkedList:
         if index == 0:
             return self.remove_first()
 
-        curr, position = ListNode(), -1
+        curr, curr_index = ListNode(), 0
         curr.next = self.head
-        while curr.next and position + 1 != index:
+        while curr.next and curr_index < index:
             curr = curr.next
-            position += 1
+            curr_index += 1
 
         data = curr.next.data
         curr.next = curr.next.next
@@ -176,14 +177,16 @@ class LinkedList:
 
     def reverse(self) -> None:
         """
-        Reverses the order of items in this list.
+        Reverses the order of elements in this list.
         Time Complexity: O(n)
         """
         prev_node = None
-        while self.head:
-            next_node = self.head.next
-            self.head.next = prev_node
-            prev_node = self.head
-            self.head = next_node
+        curr = self.head
+
+        while curr:
+            next_node = curr.next
+            curr.next = prev_node
+            prev_node = curr
+            curr = next_node
 
         self.head = prev_node
