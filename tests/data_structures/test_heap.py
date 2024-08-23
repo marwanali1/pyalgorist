@@ -20,6 +20,19 @@ class TestHeap(unittest.TestCase):
     def test_pop_single_pop(self) -> None:
         heap = Heap()
         heap.push(1)
+        self.assertEqual(heap.pop(), 1)
+        self.assertEqual(str(heap), "[]")
+
+    def test_pop_single_pop(self) -> None:
+        heap = Heap()
+        heap.push(1)
+        heap.push(2)
+        self.assertEqual(heap.pop(), 2)
+        self.assertEqual(str(heap), "[1]")
+        
+    def test_pop_single_pop_pop(self) -> None:
+        heap = Heap()
+        heap.push(1)
         heap.push(2)
         heap.push(3)
         heap.push(4)
@@ -58,3 +71,35 @@ class TestHeap(unittest.TestCase):
     def test_peek_on_empty_heap(self) -> None:
         heap = Heap()
         self.assertIsNone(heap.peek())
+
+    def test_pop_multiple_pops_char(self) -> None:
+        heap = Heap()
+        heap.push("I")
+        heap.push("N")
+        heap.push("S")
+        heap.push("E")
+        heap.push("R")
+        heap.push("T")
+        heap.push("I")
+        heap.push("O")
+        heap.push("N")
+        heap.push("S")
+        heap.push("O")
+        heap.push("R")
+        heap.push("T")
+
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+        heap.pop()
+
+        self.assertEqual(heap.pop(), "E")
+        self.assertEqual(str(heap), "[]")

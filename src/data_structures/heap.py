@@ -41,8 +41,8 @@ class Heap:
         left_child_index = self.__get_left_child_index(index)
         right_child_index = self.__get_right_child_index(index)
 
-        if not self.__data[right_child_index]:
-            return self.__data[left_child_index]
+        if right_child_index >= len(self):
+            return left_child_index
 
         return (
             left_child_index
@@ -70,7 +70,7 @@ class Heap:
     def peek(self) -> T:
         if self.is_empty():
             return None
-        
+
         return self.root_node
 
     def push(self, elem: T) -> None:
@@ -99,7 +99,7 @@ class Heap:
         """
         if self.is_empty():
             raise IndexError("Heap is empty")
-        
+
         popped_elem = self.root_node
         if len(self) == 1:
             self.__data.pop()
