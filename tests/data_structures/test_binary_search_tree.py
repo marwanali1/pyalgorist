@@ -63,3 +63,21 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertTrue(tree.search(3))
         self.assertTrue(tree.search(5))
+    
+    def test_remove(self) -> None:
+        pass
+
+    def test_search(self) -> None:
+        pass
+
+    def test_maximum(self) -> None:
+        pass
+
+    def test_minimum(self) -> None:
+        pass
+
+    def test_preorder(self) -> None:
+        pass
+
+    def test_postorder(self) -> None:
+        pass
