@@ -1,4 +1,4 @@
-from typing import Any, Iterable, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
@@ -11,7 +11,7 @@ class DynamicArray:
     def __init__(self, capacity: int = 10) -> None:
         self._capacity = capacity
         self._size = 0
-        self.array = [None] * capacity
+        self._array = [None] * capacity
 
     def __iter__(self):
         pass
@@ -26,7 +26,7 @@ class DynamicArray:
         if self._size == 0:
             return "[]"
 
-        return str(self.array[: self._size])
+        return str(self._array[: self._size])
 
     def __repr__(self) -> str:
         pass
@@ -50,12 +50,12 @@ class DynamicArray:
         """
         return self._size
 
-    def contains(self, item: T) -> bool:
+    def contains(self, elem: T) -> bool:
         """
         Returns true if this list contains the specified element.
         Time Complexity: O(n)
         """
-        return item in self.array
+        return elem in self._array
 
     def get(self, index: int) -> T:
         """
@@ -65,9 +65,9 @@ class DynamicArray:
         if index < 0 or index >= self._size:
             raise IndexError("Array index is out of range")
 
-        return self.array[index]
+        return self._array[index]
 
-    def add(self, index: int, item: T) -> None:
+    def add(self, index: int, elem: T) -> None:
         """
         Inserts the specified element at the specified position in this array.
         Time Complexity: O(n)
@@ -78,18 +78,18 @@ class DynamicArray:
         if self._size + 1 > self._capacity:
             self._resize()
 
-        if not self.array[index]:
-            self.array[index] = item
+        if not self._array[index]:
+            self._array[index] = elem
             self._size += 1
             return
 
-        new_array = self.array[:index]
-        new_array.append(item)
-        new_array += self.array[index:]
-        self.array = new_array
+        new_array = self._array[:index]
+        new_array.append(elem)
+        new_array += self._array[index:]
+        self._array = new_array
         self._size += 1
 
-    def add_last(self, item: T) -> None:
+    def add_last(self, elem: T) -> None:
         """
         Appends the specified element to the end of this array.
         Time Complexity: O(n)
@@ -97,7 +97,7 @@ class DynamicArray:
         if self._size == self._capacity:
             self._resize()
 
-        self.array[self._size] = item
+        self._array[self._size] = elem
         self._size += 1
 
     def remove(self, index: int) -> T:
@@ -108,10 +108,10 @@ class DynamicArray:
         if index < 0 or index >= self._size:
             raise IndexError("Array index is out of range")
 
-        removed_elem = self.array[index]
-        new_array = self.array[:index]
-        new_array += self.array[index + 1 :]
-        self.array = new_array
+        removed_elem = self._array[index]
+        new_array = self._array[:index]
+        new_array += self._array[index + 1 :]
+        self._array = new_array
         self._size -= 1
         return removed_elem
 
@@ -123,8 +123,8 @@ class DynamicArray:
         if not self._size:
             raise IndexError("Array is empty")
 
-        removed_elem = self.array[self._size - 1]
-        self.array[self._size - 1] = None
+        removed_elem = self._array[self._size - 1]
+        self._array[self._size - 1] = None
         self._size -= 1
         return removed_elem
 
@@ -135,6 +135,6 @@ class DynamicArray:
         """
         self._capacity *= 2
         new_array = [None] * self._capacity
-        for i, elem in enumerate(self.array):
+        for i, elem in enumerate(self._array):
             new_array[i] = elem
-        self.array = new_array
+        self._array = new_array
