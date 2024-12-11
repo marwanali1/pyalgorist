@@ -18,8 +18,8 @@ class Vertex:
         return self._adjacent_vertices
 
     def __repr__(self) -> str:
-        return f'Vertex({self.value})'
-    
+        return f"Vertex({self.value})"
+
     def __str__(self) -> str:
         return self.value
 

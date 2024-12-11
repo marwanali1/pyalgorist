@@ -1,7 +1,21 @@
+from typing import Optional
+
 class TrieNode:
     def __init__(self) -> None:
-        self.children = {}
-        self.is_end_of_word = False
+        self._children: dict[str, TrieNode] = {}
+        self._is_end_of_word: bool = False
+
+    @property
+    def children(self) -> dict[str, TrieNode]:
+        return self._children
+
+    @property
+    def is_end_of_word(self) -> bool:
+        return self._is_end_of_word
+
+    @is_end_of_word.setter
+    def is_end_of_word(self, flag: bool) -> None:
+        self._is_end_of_word = flag
 
 
 class Trie:
@@ -32,7 +46,7 @@ class Trie:
 
         return self.collect_all_words(curr)
 
-    def auto_correct(self, prefix: str) -> TrieNode:
+    def auto_correct(self, prefix: str) -> str:
         curr = self.root
         word = ""
         for char in prefix:
@@ -43,9 +57,9 @@ class Trie:
 
         return word
 
-    def collect_all_words(self, start_node: TrieNode = None) -> list[str]:
+    def collect_all_words(self, start_node: Optional[TrieNode] = None) -> list[str]:
 
-        def __collect_all_words(
+        def _collect_all_words(
             words: list[str], word: str, node: TrieNode
         ) -> list[str]:
             curr = node or self.root
@@ -53,11 +67,11 @@ class Trie:
                 if child.is_end_of_word:
                     words.append(word + key)
                 else:
-                    __collect_all_words(words, word + key, child)
+                    _collect_all_words(words, word + key, child)
 
             return words
 
-        return __collect_all_words([], "", start_node)
+        return _collect_all_words([], "", start_node)
 
     def contains_word(self, word: str) -> bool:
         """
@@ -86,10 +100,10 @@ class Trie:
         return curr
 
     def traverse(self) -> None:
-        def __traverse(node) -> None:
+        def _traverse(node) -> None:
             for key, child in node.children.items():
                 print(key)
                 if not child.is_end_of_word:
-                    __traverse(child)
+                    _traverse(child)
 
-        __traverse(self.root)
+        _traverse(self.root)

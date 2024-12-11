@@ -21,7 +21,8 @@ class DynamicArray:
 
     def __str__(self) -> str:
         """
-        Returns a string representation of this DynamicArray, containing the String representation of each element.
+        Returns a string representation of this DynamicArray, containing the String representation
+        of each element.
         """
         if self._size == 0:
             return "[]"

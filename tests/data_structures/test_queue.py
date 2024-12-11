@@ -1,3 +1,5 @@
+# pylint: disable=R0904
+
 import unittest
 from src.data_structures.queue import Queue
 
@@ -10,7 +12,7 @@ class TestQueue(unittest.TestCase):
         queue.enqueue(3)
         queue.enqueue(4)
         queue.enqueue(5)
-        self.assertTrue(queue.contains(5))
+        self.assertTrue(5 in queue)
 
     def test_contains_false(self) -> None:
         queue = Queue()
@@ -19,11 +21,11 @@ class TestQueue(unittest.TestCase):
         queue.enqueue(3)
         queue.enqueue(4)
         queue.enqueue(5)
-        self.assertFalse(queue.contains(7))
+        self.assertFalse(7 in queue)
 
     def test_contains_on_empty_queue(self) -> None:
         queue = Queue()
-        self.assertFalse(queue.contains(1))
+        self.assertFalse(1 in queue)
 
     def test_enqueue_single_enqueue(self) -> None:
         queue = Queue()

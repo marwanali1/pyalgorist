@@ -1,2 +1,4 @@
-def tree_sort(list: list[int]) -> list[int]:
+def tree_sort(elems: list[int]) -> list[int]:
+    if not elems:
+        return None
     return None

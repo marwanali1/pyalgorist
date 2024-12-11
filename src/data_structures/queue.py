@@ -1,12 +1,26 @@
-from typing import TypeVar, Generic
+# pylint: disable=R0801
+
+from typing import TypeVar
 
 T = TypeVar("T")
 
 
 class QueueNode:
     def __init__(self, data: T) -> None:
-        self.data = data
-        self.next = None
+        self._data = data
+        self._next_node = None
+
+    @property
+    def data(self) -> T:
+        return self._data
+
+    @property
+    def next_node(self):
+        return self._next_node
+
+    @next_node.setter
+    def next_node(self, node):
+        self._next_node = node
 
 
 class Queue:
@@ -15,36 +29,37 @@ class Queue:
     """
 
     def __init__(self) -> None:
-        self.first = None
-        self.last = None
+        self._first = None
+        self._last = None
 
-    def __str__(self) -> str:
-        """
-        Returns a string representation of this Queue, containing the String representation of each element.
-        """
-        if not self.first:
-            return "[]"
-
-        elems = []
-        curr = self.first
-        while curr:
-            elems.append(curr.data)
-            curr = curr.next
-
-        return str(elems)
-
-    def contains(self, elem: T) -> bool:
+    def __contains__(self, elem: T) -> bool:
         """
         Returns true if this queue contains the specified element.
         Time Complexity: O(n)
         """
-        curr = self.first
+        curr = self._first
         while curr:
             if curr.data == elem:
                 return True
-            curr = curr.next
+            curr = curr.next_node
 
         return False
+
+    def __str__(self) -> str:
+        """
+        Returns a string representation of this Queue, containing the String representation of each
+        element.
+        """
+        if not self._first:
+            return "[]"
+
+        elems = []
+        curr = self._first
+        while curr:
+            elems.append(curr.data)
+            curr = curr.next_node
+
+        return str(elems)
 
     def enqueue(self, elem: T) -> None:
         """
@@ -52,12 +67,12 @@ class Queue:
         Time Complexity: O(1)
         """
         new_elem = QueueNode(elem)
-        if self.last:
-            self.last.next = new_elem
-        self.last = new_elem
+        if self._last:
+            self._last.next_node = new_elem
+        self._last = new_elem
 
         if self.empty():
-            self.first = self.last
+            self._first = self._last
 
     def dequeue(self) -> T:
         """
@@ -67,26 +82,27 @@ class Queue:
         if self.empty():
             raise IndexError("Queue is empty")
 
-        elem = self.first.data
-        self.first = self.first.next
-        if not self.first:
-            self.last = None
-        
+        elem = self._first.data
+        self._first = self._first.next_node
+        if not self._first:
+            self._last = None
+
         return elem
 
     def peek(self) -> T:
         """
-        Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
+        Retrieves, but does not remove, the head of this queue, or returns null if this queue is
+        empty.
         Time Complexity: O(1)
         """
         if self.empty():
             return None
 
-        return self.first.data
+        return self._first.data
 
     def empty(self) -> bool:
         """
         Tests if this queue is empty.
         Time Complexity: O(1)
         """
-        return not self.first
+        return not self._first

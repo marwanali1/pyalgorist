@@ -1,3 +1,5 @@
+# pylint: disable=R0904
+
 import unittest
 from src.data_structures.linkedlist import LinkedList
 
@@ -10,7 +12,7 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(3)
         linkedlist.add_last(4)
         linkedlist.add_last(5)
-        self.assertTrue(linkedlist.contains(5))
+        self.assertTrue(5 in linkedlist)
 
     def test_contains_false(self) -> None:
         linkedlist = LinkedList()
@@ -19,11 +21,11 @@ class TestStack(unittest.TestCase):
         linkedlist.add_last(3)
         linkedlist.add_last(4)
         linkedlist.add_last(5)
-        self.assertFalse(linkedlist.contains(7))
-    
+        self.assertFalse(7 in linkedlist)
+
     def test_contains_on_empty_list(self) -> None:
         linkedlist = LinkedList()
-        self.assertFalse(linkedlist.contains(1))
+        self.assertFalse(1 in linkedlist)
 
     def test_get(self) -> None:
         linkedlist = LinkedList()

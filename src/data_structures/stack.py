@@ -1,12 +1,26 @@
-from typing import TypeVar
+# pylint: disable=R0801
+
+from typing import Generic, TypeVar
 
 T = TypeVar("T")
 
 
-class StackNode:
+class StackNode(Generic[T]):
     def __init__(self, data: T) -> None:
-        self.data = data
-        self.next = None
+        self._data = data
+        self._next_node = None
+
+    @property
+    def data(self) -> T:
+        return self._data
+
+    @property
+    def next_node(self):
+        return self._next_node
+
+    @next_node.setter
+    def next_node(self, node):
+        self._next_node = node
 
 
 class Stack:
@@ -19,7 +33,8 @@ class Stack:
 
     def __str__(self) -> str:
         """
-        Returns a string representation of this Stack, containing the String representation of each element.
+        Returns a string representation of this Stack, containing the String representation of
+        each element.
         """
         if not self.top:
             return "[]"
@@ -28,7 +43,7 @@ class Stack:
         curr = self.top
         while curr:
             elems.append(curr.data)
-            curr = curr.next
+            curr = curr.next_node
 
         return str(elems)
 
@@ -41,8 +56,8 @@ class Stack:
         while curr:
             if curr.data == elem:
                 return True
-            curr = curr.next
-        
+            curr = curr.next_node
+
         return False
 
     def empty(self) -> bool:
@@ -59,19 +74,20 @@ class Stack:
         """
         if self.empty():
             raise IndexError("Stack is empty")
-        
+
         return self.top.data
 
     def pop(self) -> T:
         """
-        Removes the object at the top of this stack and returns that object as the value of this function.
+        Removes the object at the top of this stack and returns that object as the value of this
+        function.
         Time Complexity: O(1)
         """
         if self.empty():
             raise IndexError("Stack is empty")
 
         elem = self.top.data
-        self.top = self.top.next
+        self.top = self.top.next_node
         return elem
 
     def push(self, elem: T) -> None:
@@ -80,5 +96,5 @@ class Stack:
         Time Complexity: O(1)
         """
         new_top = StackNode(elem)
-        new_top.next = self.top
+        new_top.next_node = self.top
         self.top = new_top

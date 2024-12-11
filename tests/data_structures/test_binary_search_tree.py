@@ -1,14 +1,15 @@
+# pylint: disable=R0904
+
 import unittest
 from src.data_structures.binary_search_tree import BinarySearchTree, TreeNode
 
-# TODO: Add tests for new functions
 
 class TestTreeNode(unittest.TestCase):
-    def test_TreeNode_init(self) -> None:
+    def test_init(self) -> None:
         treenode = TreeNode(1)
         self.assertEqual(treenode.value, 1)
 
-    def test_TreeNode_init_child_nodes(self) -> None:
+    def test_init_with_child_nodes(self) -> None:
         treenode = TreeNode(1)
         treenode.left = TreeNode(2)
         treenode.right = TreeNode(3)
@@ -44,7 +45,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertNotEqual(tree1, tree2)
 
-    def test_BinarySearchTree_init(self) -> None:
+    def test_init(self) -> None:
         bst = BinarySearchTree()
         self.assertIsNotNone(bst)
 
@@ -64,7 +65,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertTrue(tree.search(3))
         self.assertTrue(tree.search(5))
-    
+
     def test_remove(self) -> None:
         pass
 

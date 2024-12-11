@@ -18,7 +18,7 @@ def insertion_sort(arr: list[T]) -> list[T]:
                 position = position - 1
             else:
                 break
-            
+
         arr[position + 1] = temp_value
 
     return arr

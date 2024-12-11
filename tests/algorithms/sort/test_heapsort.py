@@ -20,7 +20,7 @@ class TestQuicksort(unittest.TestCase):
 
     def test_character_sort_maxheap(self):
         given = ["I", "N", "S", "E", "R", "T", "I", "O", "N", "S", "O", "R", "T"]
-        expected = ['T', 'T', 'S', 'S', 'R', 'R', 'O', 'O', 'N', 'N', 'I', 'I', 'E']
+        expected = ["T", "T", "S", "S", "R", "R", "O", "O", "N", "N", "I", "I", "E"]
         self.assertEqual(max_heapsort(given), expected)
 
     def test_string_sort_maxheap(self):

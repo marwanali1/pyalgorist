@@ -4,12 +4,13 @@ from src.data_structures.graph import Graph, Vertex
 
 def breadth_first_search(graph: Graph, search_value: Vertex.value) -> bool:
     """
-    Time complexity: O(V + E) where V is the number of vertices in the graph and E is the number of edges
+    Time complexity: O(V + E) where V is the number of vertices in the graph and E is the number of
+    edges
     """
     if graph.is_empty():
         return False
 
-    def __breadth_first_search(vertex) -> None:
+    def _breadth_first_search(vertex) -> None:
         visited = {}
         visited[vertex] = True
 
@@ -28,4 +29,4 @@ def breadth_first_search(graph: Graph, search_value: Vertex.value) -> bool:
 
         return False
 
-    return __breadth_first_search(graph.vertices[0])
+    return _breadth_first_search(graph.vertices[0])

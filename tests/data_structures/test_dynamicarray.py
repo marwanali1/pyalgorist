@@ -1,3 +1,5 @@
+# pylint: disable=R0904
+
 import unittest
 from src.data_structures.dynamicarray import DynamicArray
 
@@ -10,11 +12,6 @@ class TestDynamicArray(unittest.TestCase):
     def test_capacity_non_default(self) -> None:
         dynamicarray = DynamicArray(5)
         self.assertEqual(dynamicarray.capacity, 5)
-
-    def test_capacity_after_resize(self) -> None:
-        dynamicarray = DynamicArray()
-        dynamicarray._resize()
-        self.assertEqual(dynamicarray.capacity, 20)
 
     def test_contains_true(self) -> None:
         dynamicarray = DynamicArray()
@@ -176,7 +173,8 @@ class TestDynamicArray(unittest.TestCase):
 
     def test_resize(self) -> None:
         dynamicarray = DynamicArray()
-        dynamicarray._resize()
+        for i in range(11):
+            dynamicarray.add_last(i)
         self.assertEqual(dynamicarray.capacity, 20)
 
     def test_size_default(self) -> None:

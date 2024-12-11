@@ -12,12 +12,12 @@ class TestBinarySearch(unittest.TestCase):
         self.assertEqual(binary_search(nums, 6), -1)
 
     def test_binary_search_target_char_found(self):
-        chars = ['a', 'b', 'c', 'd', 'e', 'f']
-        self.assertEqual(binary_search(chars, 'd'), 3)
-    
+        chars = ["a", "b", "c", "d", "e", "f"]
+        self.assertEqual(binary_search(chars, "d"), 3)
+
     def test_binary_search_target_char_not_found(self):
-        chars = ['a', 'b', 'c', 'd', 'e', 'f']
-        self.assertEqual(binary_search(chars, 'g'), -1)
+        chars = ["a", "b", "c", "d", "e", "f"]
+        self.assertEqual(binary_search(chars, "g"), -1)
 
 
 if __name__ == "__main__":

@@ -6,75 +6,80 @@ T = TypeVar("T")
 
 class TreeNode:
     def __init__(self, value: T = None) -> None:
-        self.__value: T = value
-        self.__left: TreeNode = None
-        self.__right: TreeNode = None
+        self._value: T = value
+        self._left: TreeNode = None
+        self._right: TreeNode = None
 
     def __repr__(self) -> str:
-        return f"TreeNode(value={self.value}, left={self.left != None}, right={self.right != None})"
+        rep_str = (
+            f"TreeNode(value={self.value}, "
+            f"left={self.left is not None}, "
+            f"right={self.right is not None})"
+        )
+        return rep_str
 
     def __str__(self) -> str:
         pass
 
     @property
     def left(self) -> T:
-        return self.__left
+        return self._left
 
     @left.setter
     def left(self, left) -> None:
-        self.__left = left
+        self._left = left
 
     @property
     def right(self) -> T:
-        return self.__right
+        return self._right
 
     @right.setter
     def right(self, right) -> None:
-        self.__right = right
+        self._right = right
 
     @property
     def value(self) -> T:
-        return self.__value
+        return self._value
 
     @value.setter
     def value(self, value: T) -> None:
-        self.__value = value
+        self._value = value
 
 
 class BinarySearchTree:
     def __init__(self, root: TreeNode = None) -> None:
-        self.__root: TreeNode = root
-        self.__size: int = 0
+        self._root: TreeNode = root
+        self._size: int = 0
 
     @property
     def root(self) -> TreeNode:
-        return self.__root
+        return self._root
 
     def __eq__(self, other: object) -> bool:
         if self is other:
             return True
 
-        if type(self) != type(other):
+        if not isinstance(other, BinarySearchTree):
             return False
 
         if len(self) != len(other):
             return False
 
-        def __equal(node_one: TreeNode, node_two: TreeNode) -> bool:
+        def _equal(node_one: TreeNode, node_two: TreeNode) -> bool:
             if not node_one and not node_two:
                 return True
 
             if (not node_one or not node_two) or (node_one.value != node_two.value):
                 return False
 
-            same_left = __equal(node_one.left, node_two.left)
-            same_right = __equal(node_one.right, node_two.right)
+            same_left = _equal(node_one.left, node_two.left)
+            same_right = _equal(node_one.right, node_two.right)
             return same_left and same_right
 
-        return __equal(self.root, other.root)
+        return _equal(self.root, other.root)
 
     def __len__(self) -> int:
-        return self.__size
+        return self._size
 
     def __repr__(self) -> str:
         pass
@@ -109,21 +114,21 @@ class BinarySearchTree:
         Time Complexity: O(log n)
         """
 
-        def __insert(node: TreeNode, value: T) -> TreeNode:
+        def _insert(node: TreeNode, value: T) -> TreeNode:
             if not node:
                 node = TreeNode(value)
                 return node
 
             if value < node.value:
-                node.left = __insert(node.left, value)
+                node.left = _insert(node.left, value)
             elif value > node.value:
-                node.right = __insert(node.right, value)
+                node.right = _insert(node.right, value)
 
             return node
 
-        self.__root = __insert(self.root, value)
+        self._root = _insert(self.root, value)
 
-    def __find_node_to_remove(
+    def _find_node_to_remove(
         self, node: TreeNode, value: T
     ) -> tuple[TreeNode, TreeNode]:
         curr_node = node
@@ -143,13 +148,13 @@ class BinarySearchTree:
 
         return prev_node, node_to_remove
 
-    def __replace_with_successor(self, node: TreeNode) -> TreeNode:
+    def _replace_with_successor(self, node: TreeNode) -> TreeNode:
         successor = node.right
 
         if not successor.left:
             node.value = successor.value
             node.right = successor.right
-            return
+            return None
 
         while successor.left:
             parent_of_successor = successor
@@ -167,12 +172,12 @@ class BinarySearchTree:
         """
         Time Complexity: O(log n)
         """
-        prev_node, node_to_remove = self.__find_node_to_remove(self.root, value)
+        prev_node, node_to_remove = self._find_node_to_remove(self.root, value)
         if not node_to_remove:
             return None
 
         if node_to_remove.left and node_to_remove.right:
-            self.__replace_with_successor(node_to_remove)
+            self._replace_with_successor(node_to_remove)
         else:
             node_to_remove_child = node_to_remove.left or node_to_remove.right
 
@@ -193,7 +198,7 @@ class BinarySearchTree:
         Time Complexity: O(log n)
         """
 
-        def __search(node: TreeNode, value: T) -> bool:
+        def _search(node: TreeNode, value: T) -> bool:
             if not node:
                 return False
 
@@ -201,31 +206,31 @@ class BinarySearchTree:
                 return True
 
             if value < node.value:
-                return __search(node.left, value)
-            else:
-                return __search(node.right, value)
+                return _search(node.left, value)
 
-        return __search(self.root, value)
+            return _search(node.right, value)
+
+        return _search(self.root, value)
 
     def maximum(self) -> T:
 
-        def __max(node: TreeNode) -> int:
+        def _max(node: TreeNode) -> int:
             if node.right:
-                return __max(node.right)
-            else:
-                return node.value
+                return _max(node.right)
 
-        return __max(self.root)
+            return node.value
+
+        return _max(self.root)
 
     def minimum(self) -> T:
 
-        def __min(node: TreeNode) -> int:
+        def _min(node: TreeNode) -> int:
             if node.left:
-                return __min(node.left)
-            else:
-                return node.value
+                return _min(node.left)
 
-        return __min(self.root)
+            return node.value
+
+        return _min(self.root)
 
     def predecessor(self) -> T:
         pass
@@ -238,36 +243,36 @@ class BinarySearchTree:
         Time Complexity: O(n)
         """
 
-        def __inorder(node: TreeNode) -> list[T]:
+        def _inorder(node: TreeNode) -> list[T]:
             if not node:
                 return []
 
-            return __inorder(node.left) + [node.value] + __inorder(node.right)
+            return _inorder(node.left) + [node.value] + _inorder(node.right)
 
-        return __inorder(self.root)
+        return _inorder(self.root)
 
     def preorder(self) -> list:
         """
         Time Complexity: O(n)
         """
 
-        def __preorder(node: TreeNode) -> list[T]:
+        def _preorder(node: TreeNode) -> list[T]:
             if not node:
                 return []
 
-            return [node.value] + __preorder(node.left) + __preorder(node.right)
+            return [node.value] + _preorder(node.left) + _preorder(node.right)
 
-        return __preorder(self.root)
+        return _preorder(self.root)
 
     def postorder(self) -> list[T]:
         """
         Time Complexity: O(n)
         """
 
-        def __postorder(node: TreeNode) -> list[T]:
+        def _postorder(node: TreeNode) -> list[T]:
             if not node:
                 return []
 
-            return __postorder(node.left) + __postorder(node.right) + [node.value]
+            return _postorder(node.left) + _postorder(node.right) + [node.value]
 
-        return __postorder(self.root)
+        return _postorder(self.root)

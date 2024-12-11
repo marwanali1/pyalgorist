@@ -8,7 +8,7 @@ class TestHeap(unittest.TestCase):
         heap.push(1)
         self.assertEqual(str(heap), "[1]")
 
-    def test_push_multiple_pushs(self) -> None:
+    def test_push_multiple_pushes(self) -> None:
         heap = Heap()
         heap.push(1)
         heap.push(2)
@@ -17,7 +17,7 @@ class TestHeap(unittest.TestCase):
         heap.push(5)
         self.assertEqual(str(heap), "[5, 4, 2, 1, 3]")
 
-    def test_pop_single_pop(self) -> None:
+    def test_pop_single_pop_after_single_push(self) -> None:
         heap = Heap()
         heap.push(1)
         self.assertEqual(heap.pop(), 1)
@@ -29,7 +29,7 @@ class TestHeap(unittest.TestCase):
         heap.push(2)
         self.assertEqual(heap.pop(), 2)
         self.assertEqual(str(heap), "[1]")
-        
+
     def test_pop_single_pop_pop(self) -> None:
         heap = Heap()
         heap.push(1)

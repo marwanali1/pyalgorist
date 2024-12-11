@@ -1,3 +1,7 @@
+# pylint: disable=R0904
+# pylint: disable=W0212
+
+
 import unittest
 from src.data_structures.hashtable import HashNode, HashTable
 
@@ -52,13 +56,13 @@ class TestHashTable(unittest.TestCase):
 
     def test_hash_code(self) -> None:
         hashtable = HashTable()
-        actual = hashtable._HashTable__hash_code("one")
+        actual = hashtable._hash_code("one")
         expected = 110182
         self.assertEqual(actual, expected)
 
     def test_index(self) -> None:
         hashtable = HashTable()
-        actual = hashtable._HashTable__index("one")
+        actual = hashtable._index("one")
         expected = 110182 % hashtable.capacity
         self.assertEqual(actual, expected)
 
@@ -79,7 +83,7 @@ class TestHashTable(unittest.TestCase):
                 "twelve": 12,
             },
         )
-        self.assertFalse(hashtable._HashTable__exceeds_load_factor())
+        self.assertFalse(hashtable._exceeds_load_factor())
 
     def test_resize(self) -> None:
         actual = HashTable(
@@ -87,7 +91,7 @@ class TestHashTable(unittest.TestCase):
         )
         self.assertEqual(actual.capacity, 16)
 
-        actual._HashTable__resize()
+        actual._resize()
         self.assertEqual(actual.capacity, 32)
 
         expected = HashTable(
@@ -135,12 +139,12 @@ class TestHashTable(unittest.TestCase):
 
     def test_get_empty_hashtable(self) -> None:
         hashtable = HashTable()
-        with self.assertRaises(KeyError) as err:
+        with self.assertRaises(KeyError):
             hashtable.get("three")
 
     def test_get_invalid_key(self) -> None:
         hashtable = HashTable(from_dict={"one": 1, "two": 2, "four": 4, "five": 5})
-        with self.assertRaises(KeyError) as err:
+        with self.assertRaises(KeyError):
             hashtable.get("three")
 
     def test_keys(self) -> None:
@@ -188,12 +192,12 @@ class TestHashTable(unittest.TestCase):
         hashtable = HashTable(
             from_dict={"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
         )
-        with self.assertRaises(KeyError) as err:
+        with self.assertRaises(KeyError):
             hashtable.get("six")
 
     def test_remove_empty(self) -> None:
         hashtable = HashTable()
-        with self.assertRaises(KeyError) as err:
+        with self.assertRaises(KeyError):
             hashtable.get("one")
 
     def test_values(self) -> None:
