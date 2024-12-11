@@ -15,13 +15,12 @@ jobs:
           python-version: "3.12"
       - run: pip3 install pipenv
       - run: pipenv install
-      - run: pipenv shell
       - name: Lint check
-        run: pylint .
+        run: pipenv run pylint .
       - name: Format check
-        run: black . --diff
+        run: pipenv run black . --diff
       # - name: mypy
-      #   run: mypy .
+      #   run: pipenv run mypy .
   
   # test:
   #   runs-on: ubuntu-latest
