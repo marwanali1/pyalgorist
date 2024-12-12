@@ -26,8 +26,8 @@ jobs:
       - name: Format with Black
         run: pipenv run black . --check
 
-      # - name: mypy
-      #   run: pipenv run mypy .
+      - name: mypy
+        run: pipenv run mypy .
   
   test:
     name: Test 
