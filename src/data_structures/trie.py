@@ -1,13 +1,13 @@
-from typing import Optional
+from typing import Optional, Self
 
 
 class TrieNode:
     def __init__(self) -> None:
-        self._children: dict[str, TrieNode] = {}
+        self._children: dict[str, Self] = {}
         self._is_end_of_word: bool = False
 
     @property
-    def children(self) -> dict[str, TrieNode]:
+    def children(self) -> dict[str, Self]:
         return self._children
 
     @property
