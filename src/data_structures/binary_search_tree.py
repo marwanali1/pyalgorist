@@ -213,7 +213,6 @@ class BinarySearchTree:
         return _search(self.root, value)
 
     def maximum(self) -> T:
-
         def _max(node: TreeNode) -> int:
             if node.right:
                 return _max(node.right)
@@ -223,7 +222,6 @@ class BinarySearchTree:
         return _max(self.root)
 
     def minimum(self) -> T:
-
         def _min(node: TreeNode) -> int:
             if node.left:
                 return _min(node.left)

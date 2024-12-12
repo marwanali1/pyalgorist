@@ -4,7 +4,6 @@ T = TypeVar("T")
 
 
 class Vertex:
-
     def __init__(self, value: T) -> None:
         self._value = value
         self._adjacent_vertices = []
@@ -29,7 +28,6 @@ class Vertex:
 
 
 class Graph:
-
     def __init__(self) -> None:
         self._vertices = []
 

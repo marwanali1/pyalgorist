@@ -1,8 +1,6 @@
 from typing import Optional
 
 
-
-
 class TrieNode:
     def __init__(self) -> None:
         self._children: dict[str, TrieNode] = {}
@@ -61,7 +59,6 @@ class Trie:
         return word
 
     def collect_all_words(self, start_node: Optional[TrieNode] = None) -> list[str]:
-
         def _collect_all_words(
             words: list[str], word: str, node: TrieNode
         ) -> list[str]:

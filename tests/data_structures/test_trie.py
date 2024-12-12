@@ -3,7 +3,6 @@ from src.data_structures.trie import Trie
 
 
 class TestTrie(unittest.TestCase):
-
     def test_add_word_single_add(self) -> None:
         trie = Trie()
         trie.add_word("bike")

@@ -5,7 +5,6 @@ from src.algorithms.search.bredth_first_search import breadth_first_search
 
 
 class TestTrie(unittest.TestCase):
-
     TEST_GRAPH = None
 
     @classmethod

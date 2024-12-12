@@ -25,10 +25,20 @@ jobs:
       
       - name: Format with Black
         run: pipenv run black . --check
-        # continue-on-error: false
 
       # - name: mypy
       #   run: pipenv run mypy .
   
-  # test:
-  #   runs-on: ubuntu-latest
+  test:
+    name: Test 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Unit Test
+        run: python3 -m unittest discover

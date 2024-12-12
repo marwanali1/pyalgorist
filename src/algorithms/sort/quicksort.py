@@ -4,7 +4,6 @@ T = TypeVar("T")
 
 
 class QuicksortArray:
-
     def __init__(self, elems: list[T]) -> None:
         self._elems = elems if elems else []
 
@@ -30,7 +29,6 @@ class QuicksortArray:
         right -= 1
 
         while True:
-
             # Shift left point until it reaches a value greater than or equal to the pivot
             while self.elems[left] < pivot:
                 left += 1
