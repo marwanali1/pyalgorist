@@ -9,16 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python 3
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - run: pip3 install pipenv
-      - run: pipenv install
-      - name: Lint check
+
+      - name: Install dependencies
+        run: |
+          pip3 install pipenv
+          pipenv install
+        
+      - name: Lint with Pylint
         run: pipenv run pylint .
-      - name: Format check
-        run: pipenv run black . --diff
+      
+      - name: Format with Black
+        run: pipenv run black . --check
+        continue-on-error: false
+
       # - name: mypy
       #   run: pipenv run mypy .
   
