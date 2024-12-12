@@ -1,6 +1,8 @@
 from typing import Optional
 
 
+
+
 class TrieNode:
     def __init__(self) -> None:
         self._children: dict[str, TrieNode] = {}
